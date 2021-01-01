@@ -1,7 +1,7 @@
 # BERT and GNN for Social Studies Question Answering
 
 BERT and transformers have been a fairly popular choice for question answering (QA) tasks. They are trained to extract answer spans from the passage and have been proven to be effective for QA tasks across various domains. However, for Chinese corpus in which there is no word boundaries, BERT sometimes extracts incomplete answer spans. This phenomenon is even more clear for the social studies domain, where answers are usually in the form of a complex compound noun or a set of nouns. For example: 
-1. The answer is a **compound noun**:
+1. When the answer is a **compound noun**, BERT usually returns part of it:
     + Question:
         + 「建研所」 是什麼組織的縮寫? (ABRI is the abbreviation for what organization?)
     + Expected answer:
@@ -9,7 +9,7 @@ BERT and transformers have been a fairly popular choice for question answering (
     + Prediction by BERT:
         + 內政部 (Ministry of the Interior)
 
-2. The answer is **a set of nouns**:
+2. When the answer is **a set of nouns**, BERT usually returns one of the nouns:
     + Question: 
         + 「阿拉伯之春」運動中，發揮影響力的是那些社群媒體?  
         (Which social media platforms have a large influence on the Arab Spring Revolution?)
@@ -18,6 +18,7 @@ BERT and transformers have been a fairly popular choice for question answering (
     + Prediction by BERT: 
         + Youtube (Youtube)
 
+In this project, we aim to 
 By combining Bert and GNN features, we can integrate both information from the contextualized pretrained model and dependency graph to make more accurate predictions.
 
 To exploit the graph information, however, we meet with the challenge to aggregate information from different graphs, i.e. the passage graph from context passages and the question graph from the question body. To deal with this issue, we also make experiment on different GNN architectures. First, we adopt the framework of (Li et al., 2019), in which the cross-attention mechanism is introduced to propagate information between the passage graph and the question graph. Each node in this architecture is updated with the information of neighboring nodes and nodes from the other graph iteratively. We call this architecture CrossGNN, shown in Figure 16.
