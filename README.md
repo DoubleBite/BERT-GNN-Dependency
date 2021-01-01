@@ -2,9 +2,13 @@
 
 BERT and transformers have been a fairly popular choice for question answering (QA) tasks. They are trained to extract answer spans from the passage and have been proven to be effective for QA tasks across various domains. However, for Chinese corpus in which there is no word boundaries, BERT sometimes extracts incomplete answer spans. This phenomenon is even more clear for the social studies domain, where answers are usually in the form of a complex compound noun or a set of nouns. For example: 
 1. The answer is a **compound noun**:
+
+
+2. The answer is **a set of nouns**:
     + Question: 「阿拉伯之春」運動中，發揮影響力的是那些社群媒體? <br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Which social media platforms have a large influence on the Arab Spring Revolution?)
-    + 
+    (Which social media platforms have a large influence on the Arab Spring Revolution?)
+    + Expected answer: 臉書、推特、Youtube (Facebook, Twitter, Youtube) 
+    + Prediction of BERT: 臉書 (Facebook)
 
 By combining Bert and GNN features, we can integrate both information from the contextualized pretrained model and dependency graph to make more accurate predictions.
 
