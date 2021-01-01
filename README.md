@@ -21,7 +21,7 @@ BERT and transformers have been a fairly popular choice for question answering (
 In this project, we aim to address the above problems by introducing the dependency information between words. The dependency relationship provides clues to glue relevant words together so that BERT can find more proper answer spans. For example, "內政部" has a dependency relationship "compound:nn" with "建築研究所", so they might be considered together after we add the dependency features. We employ GNN encoders to integrate this dependency information and the resulted `graph representations` are concatenated to the original `BERT representations` before passing into the classifier (as shown below).
 
 
-<img src="https://i.imgur.com/s5CoymL.png" width="600">
+<img src="https://i.imgur.com/s5CoymL.png" width="500">
 
 <img src="https://i.imgur.com/EYHOUdo.png" width="600">
 
