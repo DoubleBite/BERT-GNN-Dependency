@@ -18,7 +18,11 @@ BERT and transformers have been a fairly popular choice for question answering (
     + Prediction by BERT: 
         + Youtube (Youtube)
 
-In this project, we aim to 
+In this project, we aim to address the above problems by introducing the dependency information between words. The dependency relationship provides clues to glue relevant words together so that BERT can find more proper answer spans. For example, "內政部" has a dependency relationship "compound:nn" with "建築研究所", so they might be considered together after we add the dependency features. We employ GNN encoders to integrate this dependency information and the resulted `graph representations` are concatenated to the original "BERT representations" before passing into the classifier (as shown below).
+
+
+
+
 By combining Bert and GNN features, we can integrate both information from the contextualized pretrained model and dependency graph to make more accurate predictions.
 
 To exploit the graph information, however, we meet with the challenge to aggregate information from different graphs, i.e. the passage graph from context passages and the question graph from the question body. To deal with this issue, we also make experiment on different GNN architectures. First, we adopt the framework of (Li et al., 2019), in which the cross-attention mechanism is introduced to propagate information between the passage graph and the question graph. Each node in this architecture is updated with the information of neighboring nodes and nodes from the other graph iteratively. We call this architecture CrossGNN, shown in Figure 16.
