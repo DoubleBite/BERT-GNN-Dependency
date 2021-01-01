@@ -28,7 +28,7 @@ Specifically, we use `StanfordCoreNLP` and `Stanza` to do dependency parsing and
 We also tried another architecture in our experiment. In addition to the connections (dependency relationships) within the passage and question, we add interconncections across the passage and question so that information can be shared between them. We call this architecture `Dual GNN`. Yet, in our experiment, this change offers minor contribution. Overall, adding a GNN encoder provides 3% performance gain over the baseline BERT QA model.
 
 
-<img src="https://i.imgur.com/H1J1yi9.png" width="500">
+<img src="https://i.imgur.com/AUVisvR.png" width="500">
 
 
 ## Experiments
