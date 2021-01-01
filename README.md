@@ -23,15 +23,12 @@ In this project, we aim to address the above problems by introducing the depende
 
 <img src="https://i.imgur.com/5t8ibLd.png" width="500">
 
-Specifically, we use `StanfordCoreNLP` and `Stanza` to do dependency parsing and generate the dependency graphs for our corpus. In our model, each `passage-question pair` goes through two types of encoders: the **BERT encoder** to get the normal `BERT representations`, and the **GNN encoder** (GCN or GAT) to get `graph representations` that contains dependency information. Then, two types of representations are concatenated together and passed into the final classifier to get the start and end positions of the answer spans.
+Specifically, we use `StanfordCoreNLP` and `Stanza` to do dependency parsing and generate the dependency graphs for our corpus. In our model, each `passage-question pair` goes through two types of encoders: the **BERT encoder** to get the normal `BERT representations`, and the **GNN encoder** (GCN or GAT) to get `graph representations` that contains dependency information. Then, two types of representations are concatenated together and passed into the final classifier to calculate the start and end positions of the answer spans. 
+
+We also tried another architecture in our experiment. In addition to the connections (dependency relationships) within the passage and question, we add interconncections across the passage and question so that information can be shared between them. We call this architecture `Dual GNN`. Yet, in our experiment, this change offers minor contribution. Overall, adding a GNN encoder provides 3% performance gain over the baseline BERT QA model.
 
 
-<img src="https://i.imgur.com/EYHOUdo.png" width="600">
-
-By combining Bert and GNN features, we can integrate both information from the contextualized pretrained model and dependency graph to make more accurate predictions.
-
-To exploit the graph information, however, we meet with the challenge to aggregate information from different graphs, i.e. the passage graph from context passages and the question graph from the question body. To deal with this issue, we also make experiment on different GNN architectures. First, we adopt the framework of (Li et al., 2019), in which the cross-attention mechanism is introduced to propagate information between the passage graph and the question graph. Each node in this architecture is updated with the information of neighboring nodes and nodes from the other graph iteratively. We call this architecture CrossGNN, shown in Figure 16.
-We also tried another architecture in which the message propagates within the graphs and between the graphs separately. Hence, it produces two kinds of output features: one is intra-graph features and the other is inter-graph features. We call this architecture DualGNN, as shown in Figure 17.
+<img src="https://i.imgur.com/EYHOUdo.png" width="500">
 
 
 ## Experiments
