@@ -23,7 +23,7 @@ In this project, we aim to address the above problems by introducing the depende
 
 <img src="https://i.imgur.com/5t8ibLd.png" width="500">
 
-Specifically, we use `StanfordCoreNLP` and `Stanza` to do dependency parsing and generate the dependency graphs for our corpus. In our model, each passage-question pair goes through two types of encoders: the BERT encoder to get the normal BERT representations, and the GNN encoder (GCN or GAT) to get graph representations that contains dependency information. Then, two types of representations are concatenated together and passed into the final classifier to get the start and end positions of the answer spans.
+Specifically, we use `StanfordCoreNLP` and `Stanza` to do dependency parsing and generate the dependency graphs for our corpus. In our model, each **passage-question pair** goes through two types of encoders: the **BERT encoder** to get the normal `BERT representations`, and the **GNN encoder** (GCN or GAT) to get `graph representations` that contains dependency information. Then, two types of representations are concatenated together and passed into the final classifier to get the start and end positions of the answer spans.
 
 
 <img src="https://i.imgur.com/EYHOUdo.png" width="600">
