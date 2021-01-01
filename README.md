@@ -9,7 +9,7 @@ BERT and transformers have been a fairly popular choice for question answering (
     + Prediction by BERT:
         + 內政部 (Ministry of the Interior)
 
-2. When the answer is **a set of nouns**, BERT usually returns one of the nouns:
+2. When the answer is **a set of nouns**, BERT usually returns only one/some of the nouns:
     + Question: 
         + 「阿拉伯之春」運動中，發揮影響力的是那些社群媒體?  
         (Which social media platforms have a large influence on the Arab Spring Revolution?)
