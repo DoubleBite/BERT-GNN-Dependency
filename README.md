@@ -5,10 +5,15 @@ BERT and transformers have been a fairly popular choice for question answering (
 
 
 2. The answer is **a set of nouns**:
-    + Question: 「阿拉伯之春」運動中，發揮影響力的是那些社群媒體? <br>
-    (Which social media platforms have a large influence on the Arab Spring Revolution?)
-    + Expected answer: 臉書、推特、Youtube (Facebook, Twitter, Youtube) 
-    + Prediction of BERT: 臉書 (Facebook)
+    + Question: 
+        + 「阿拉伯之春」運動中，發揮影響力的是那些社群媒體?
+        + (Which social media platforms have a large influence on the Arab Spring Revolution?)
+    + Expected answer: 
+        + 臉書、推特、Youtube 
+        + (Facebook, Twitter, Youtube) 
+    + Prediction of BERT: 
+        + 臉書 
+        + (Facebook)
 
 By combining Bert and GNN features, we can integrate both information from the contextualized pretrained model and dependency graph to make more accurate predictions.
 
