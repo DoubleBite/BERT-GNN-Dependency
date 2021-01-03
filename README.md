@@ -35,7 +35,7 @@ We also tried another architecture in our experiment. In addition to the connect
 
 ### BERT Baseline
 
-We make our baseline BERT-based extractive QA model using AllenNLP.
+We make our baseline (BERT-based extractive QA model) using AllenNLP.
 
 + experiment_config: [configs/ssqa_span.jsonnet](configs/ssqa_span.jsonnet).
 + dataset_reader: [libs/dataset_readers/ssqa_span_reader.py](libs/dataset_readers/ssqa_span_reader.py). 
