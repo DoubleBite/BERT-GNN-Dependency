@@ -1,4 +1,4 @@
-# BERT and GNN for Social Studies Question Answering
+# BERT + GNN for Social Studies Question Answering
 
 BERT and transformers have been a fairly popular choice for question answering (QA) tasks. They are trained to extract answer spans from the passage and have been proven to be effective for QA tasks across various domains. However, for Chinese corpus in which there is no word boundaries, BERT sometimes extracts incomplete answer spans. This phenomenon is even more clear for the social studies domain, where answers are usually in the form of a complex compound noun or a set of nouns. For example: 
 1. When the answer is a **compound noun**, BERT usually returns part of it:
