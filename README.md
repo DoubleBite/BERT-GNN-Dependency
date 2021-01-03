@@ -44,6 +44,7 @@ We make our baseline (BERT-based extractive QA model) using AllenNLP.
 
 
 ```bash
+# Training
 python -m allennlp train \
     "configs/ssqa_span.jsonnet" \
     --serialization-dir "results/tmp" \
@@ -51,6 +52,7 @@ python -m allennlp train \
     --overrides "{'data_loader.batch_sampler.batch_size':16}" \
     -f
 
+# Prediction
 python -m allennlp predict \
     "results/tmp/model.tar.gz" \
     "data/ssqa_multiple_choice_span/test.json" \
@@ -76,13 +78,16 @@ We experiment on different gnn encoders to test whether dependency information h
 
 
 ```bash
+# Training
+# gnn_encoder types: gcn, dual_gcn, dual_gat, cross_gcn, cross_gat
 python -m allennlp train \
     "configs/ssqa_dependency_lazy.jsonnet" \
     --serialization-dir "results/tmp2" \
     --include-package "libs" \
-    --overrides "{'data_loader.batch_size':8}" \
+    --overrides "{'model.gnn_encoder.type':'gcn'}" \
     -f
 
+# Prediction
 python -m allennlp predict \
     "results/tmp2/model.tar.gz" \
     "data/ssqa_multiple_choice_with_dependency/test.json" \
