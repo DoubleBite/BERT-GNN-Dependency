@@ -37,10 +37,10 @@ We also tried another architecture in our experiment. In addition to the connect
 
 We make our baseline BERT-based extractive QA model using AllenNLP.
 
-+ experiment_config: configs/ssqa_span.jsonnet(configs/ssqa_span.jsonnet).
-+ dataset_reader: libs/dataset_reader/ssqa_span_reader.py(libs/dataset_reader/ssqa_span_reader.py). 
++ experiment_config: [configs/ssqa_span.jsonnet](configs/ssqa_span.jsonnet).
++ dataset_reader: [libs/dataset_reader/ssqa_span_reader.py](libs/dataset_reader/ssqa_span_reader.py). 
 + model: see [allennlp-models/rc/models/transformer_qa.py](https://github.com/allenai/allennlp-models/blob/main/allennlp_models/rc/models/transformer_qa.py)
-+ predictor: libs/predictors/ssqa_predictor.py(libs/predictors/ssqa_predictor.py).
++ predictor: [libs/predictors/ssqa_predictor.py](libs/predictors/ssqa_predictor.py).
 
 
 ```bash
@@ -66,18 +66,18 @@ bash run_span_baseline.sh
 
 
 ### BERT_GNN
-We experiment on different gnn encoders and 
+We experiment on different gnn encoders to test whether dependency information helps BERT identify more accurate span borders.
 
-+ experiment_config: configs/ssqa_dependency_lazy.jsonnet(configs/ssqa_dependency_lazy.jsonnet).
++ experiment_config: [configs/ssqa_dependency_lazy.jsonnet](configs/ssqa_dependency_lazy.jsonnet).
 + dataset_reader: [libs/dataset_reader/ssqa_dependency_reader.py](libs/dataset_reader/ssqa_dependency_reader.py). 
-+ model: libs/models/transformer_gnn.py(libs/models/transformer_gnn.py).
-+ modules: libs/modules/gnn_encoders.py(libs/modules/gnn_encoders.py).
-+ predictor: libs/predictors/ssqa_predictor.py(libs/predictors/ssqa_predictor.py).
++ model: [libs/models/transformer_gnn.py](libs/models/transformer_gnn.py).
++ modules: [libs/modules/gnn_encoders.py](libs/modules/gnn_encoders.py).
++ predictor: [libs/predictors/ssqa_predictor.py](libs/predictors/ssqa_predictor.py).
 
 
 ```bash
 python -m allennlp train \
-    "configs/ssqa_dependency_lay.jsonnet" \
+    "configs/ssqa_dependency_lazy.jsonnet" \
     --serialization-dir "results/tmp2" \
     --include-package "libs" \
     --overrides "{'data_loader.batch_sampler.batch_size':16}" \
