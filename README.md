@@ -80,7 +80,7 @@ python -m allennlp train \
     "configs/ssqa_dependency_lazy.jsonnet" \
     --serialization-dir "results/tmp2" \
     --include-package "libs" \
-    --overrides "{'data_loader.batch_sampler.batch_size':16}" \
+    --overrides "{'data_loader.batch_size':16}" \
     -f
 
 python -m allennlp predict \
