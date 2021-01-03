@@ -25,7 +25,7 @@ In this project, we aim to address the above problems by adding the dependency i
 
 Specifically, we use `StanfordCoreNLP` and `Stanza` to do dependency parsing and generate the dependency graphs for our corpus. In our model, each `passage-question pair` goes through two types of encoders: the **BERT encoder** to get the normal `BERT representations`, and the **GNN encoder** (GCN or GAT) to get the `graph representations` that contain dependency information. Then, two types of representations are concatenated together and passed into the final classifier to calculate the start and end positions of the answer spans. 
 
-We also tried another architecture in our experiment. In addition to the connections (dependency relationships) within the passage and question, we add interconncections across the passage and question so that information can be shared between them. We call this architecture `Dual GNN`. Yet, in our experiment, this change offers minor contribution. Overall, adding a GNN encoder provides 3% performance gain over the baseline BERT QA model.
+We also tried another architecture in our experiment. In addition to the connections (dependency relationships) within the passage and question, we add interconncections across the passage and question so that information can be shared between them. We call this architecture `Dual GNN`. Yet, in our experiment, this change offers minor contribution (less than 1%). Overall, adding a GNN encoder provides 3% performance gain over the baseline BERT QA model.
 
 
 <img src="https://i.imgur.com/AUVisvR.png" width="500">
@@ -84,7 +84,7 @@ python -m allennlp train \
     "configs/ssqa_dependency_lazy.jsonnet" \
     --serialization-dir "results/tmp2" \
     --include-package "libs" \
-    --overrides "{'model.gnn_encoder.type':'gcn'}" \
+    --overrides "{'model.gnn_encoder.type':'dual_gcn'}" \
     -f
 
 # Prediction
