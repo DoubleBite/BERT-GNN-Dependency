@@ -13,6 +13,7 @@ import logging
 from typing import Any, Dict, List, Tuple, Optional, Iterable
 from overrides import overrides
 from itertools import product
+import random
 
 from allennlp.data import Token, Instance, DatasetReader
 from allennlp.data.fields import MetadataField, TextField, SpanField, AdjacencyField
@@ -28,6 +29,8 @@ logger = logging.getLogger(__name__)
 @DatasetReader.register("ssqa_dependency")
 class SSQADependencyReader(DatasetReader):
     """Reads a JSON-formatted ssqa dataset and returns a ``Dataset``.
+
+    Note that because the data with dependnecy information is large, we need to use `lazy` mode to read the dataset.
 
     Fields:
         + ``question_with_context``: a ``TextField`` that contains the concatenation of question and contex.
@@ -85,6 +88,12 @@ class SSQADependencyReader(DatasetReader):
         logger.info("Reading file at %s", file_path)
         with open_compressed(cached_path(file_path), 'r') as dataset_file:
             dataset = json.load(dataset_file)
+
+        # We dynamic shuffle the dataset every epoch because shuffling is disabled in lazy mode
+        print("========================")
+        print("Shuffle the dataset")
+        random.shuffle(dataset)
+        print("========================")
 
         # dataset = dataset[:1]
         logger.info("Reading the dataset")
@@ -237,8 +246,10 @@ class SSQADependencyReader(DatasetReader):
                                  x[1]+start_of_context)
                                 for x in passage_edges_window]
         passage_edge_labels = [x[2] for x in passage_edges_window]
+        # To save memory, do not pass the labels
         dependency_edge_field = AdjacencyField(
-            question_edge_indices+passage_edge_indices, qp_field, question_edge_labels+passage_edge_labels)
+            question_edge_indices+passage_edge_indices, qp_field)
+        # question_edge_indices+passage_edge_indices, qp_field, question_edge_labels+passage_edge_labels)
 
         # Interconnection edges between context and question nodes
         cross_edges = product(
@@ -246,7 +257,8 @@ class SSQADependencyReader(DatasetReader):
             range(start_of_context, start_of_context+len(tokenized_context)))
         cross_edges = list(cross_edges)
         cross_edge_field = AdjacencyField(
-            cross_edges, qp_field, ["cross"]*len(cross_edges))
+            # cross_edges, qp_field, ["cross"]*len(cross_edges))
+            cross_edges, qp_field)
 
         # make the answer span
         if token_answer_span is not None:

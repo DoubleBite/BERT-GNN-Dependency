@@ -165,7 +165,8 @@ class SSQASpanReader(DatasetReader):
                     "context": context,
                     "question": question,
                     "choices": choices,
-                    "answer": answer
+                    # It seems the model expects multiple answers
+                    "answers": [answer]
                 }
                 instance = self.text_to_instance(
                     tokenized_question,

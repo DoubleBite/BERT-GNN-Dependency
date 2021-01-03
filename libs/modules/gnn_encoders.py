@@ -18,6 +18,9 @@ class GNNEncoder(torch.nn.Module, Registrable):
     def forward(self):
         raise NotImplementedError
 
+    def get_output_dim(self):
+        raise NotImplementedError
+
 
 @GNNEncoder.register("gcn")
 class GCN(torch.nn.Module):
@@ -37,6 +40,9 @@ class GCN(torch.nn.Module):
         x = self.conv2(x, edge_index)
         x = F.relu(x)
         return x.squeeze()
+
+    def get_output_dim(self):
+        return self.conv2.out_channels
 
 
 @GNNEncoder.register("cross_gat")
@@ -74,6 +80,9 @@ class CrossGAT(torch.nn.Module):
 
         return x.squeeze()
 
+    def get_output_dim(self):
+        return self.conv3.out_channels
+
 
 @GNNEncoder.register("cross_gcn")
 class CrossGCN(torch.nn.Module):
@@ -110,6 +119,9 @@ class CrossGCN(torch.nn.Module):
 
         return x.squeeze()
 
+    def get_output_dim(self):
+        return self.conv3.out_channels
+
 
 @GNNEncoder.register("dual_gcn")
 class DualGCN(torch.nn.Module):
@@ -144,6 +156,9 @@ class DualGCN(torch.nn.Module):
 
         return torch.cat([x1.squeeze(), x2.squeeze()], -1)
 
+    def get_output_dim(self):
+        return self.conv2.out_channels * 2
+
 
 @GNNEncoder.register("dual_gat")
 class DualGAT(torch.nn.Module):
@@ -177,3 +192,6 @@ class DualGAT(torch.nn.Module):
         x2 = F.dropout(x2)
 
         return torch.cat([x1.squeeze(), x2.squeeze()], -1)
+
+    def get_output_dim(self):
+        return self.conv2.out_channels * 2
