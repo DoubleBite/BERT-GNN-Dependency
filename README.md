@@ -12,7 +12,7 @@ BERT and transformers have been a fairly popular choice for question answering (
 2. When the answer is **a set of nouns**, BERT usually returns only one/some of the nouns:
     + Question: 
         + 「阿拉伯之春」運動中，發揮影響力的是那些社群媒體?  
-        (Which social media platforms have a large influence on the Arab Spring Revolution?)
+        (What social media platforms play a significant role in the Arab Spring Revolution?)
     + Expected answer: 
         + 臉書、推特、Youtube (Facebook, Twitter, and Youtube) 
     + Prediction by BERT: 
