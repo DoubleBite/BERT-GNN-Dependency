@@ -35,18 +35,39 @@ We also tried another architecture in our experiment. In addition to the connect
 
 ### BERT Baseline
 
+We make our baseline BERT-based extractive QA model using AllenNLP.
+
++ experiment_config: configs/ssqa_span.jsonnet.
++ dataset_reader: libs/dataset_reader/ssqa_span_reader.py. 
++ model: see [allennlp-models/rc/models/transformer_qa.py](https://github.com/allenai/allennlp-models/blob/main/allennlp_models/rc/models/transformer_qa.py)
++ predictor: libs/predictors/ssqa_predictor.py.
 
 
-## Conclusion
+```bash
+python -m allennlp train \
+    "configs/ssqa_span.jsonnet" \
+    --serialization-dir "results/tmp" \
+    --include-package "libs" \
+    --overrides "{'data_loader.batch_sampler.batch_size':16}" \
+    -f
+
+python -m allennlp predict \
+    "results/tmp/model.tar.gz" \
+    "data/ssqa_multiple_choice_span/test.json" \
+    --include-package "libs" \
+    --output-file "results/tmp/predictions.jsonl" \
+    --use-dataset-reader \
+    --predictor ssqa
 
 
-
-Entailment 
-
-不可能会为居民提供什么服务？
-
-
-居住地的邮局、农会、渔会等组织，提供居民办理借款、存款或提款等服务；此外，邮局还提供邮票的贩售、收寄信件、包裹等服务；农会提供肥料、协助农民作物收购与销售；渔会也协助渔民提升技术，并开发各种特色商品。", "question": "小敏的妈妈目前在邮局服务，请问小敏的妈妈不可能会为居民提供什么服务？", "choices": {"0": "提款、存款", "1": "提供肥料", "2": "收寄信件", "3": "贩售邮票"}, "answer": "提供肥料"
+# Modify the detailed configuration and run the entire experiment using this shell script
+bash run_span_baseline.sh
+```
 
 
+### BERT_GNN
 
+Modify the detailed configuration and run the entire experiment using this shell script
+```bash
+bash run_gnn_dependency.sh
+```
